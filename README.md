@@ -4,6 +4,11 @@
 
 TFCA is a very simple Terraform module that can be used to create a self-signed root Certificate Authority (CA), which then signs an arbitrary number of leaf certificates. TFCA does not create an intermediate CA between the root CA and the leaves.
 
+## Requirements
+
+TFCA requires Terraform 0.13 or later.
+## Alternatives
+
 This is a tool primarily used for testing purposes. If you want to operate a serious CA, then you should look at [easy-rsa](https://github.com/OpenVPN/easy-rsa), [HashiCorp Vault](https://www.vaultproject.io/), [Cloudflare cfssl](https://github.com/cloudflare/cfssl), or [AWS Certificate Manager Private Certificate Authority](https://aws.amazon.com/certificate-manager/private-certificate-authority/).
 
 ## Examples
@@ -12,7 +17,7 @@ This Terraform code creates a self-signed CA certificate with the Common Name `e
 
 ```terraform
 module "mycerts" {
-  source         = "github.com/neocrym/tfca?ref=v0.1.0"
+  source         = "github.com/neocrym/tfca?ref=v0.1.1"
   ca_common_name = "example.com"
   leaf_certs = {
     server1 = {
@@ -59,16 +64,12 @@ The CA certificate's identity is set with the following variables. They are all 
  - `ca_postal_code`
  - `ca_serial_number`
 
-Information about the leaf certificates are set by assigning a mapping to the `leaf_certs` variable.
- - `leaf_certs` -- **Optional.**
-
-The options are:
+Information about the leaf certificates are set by assigning a mapping to the `leaf_certs` variable. The mapping keys become the filenames for the certificates and private keys, and the mapping values must contain these keys:
  - `validity_period_hours` -- **Optional.** The number of hours after issuing that the CA certificate will be valid for.
  - `early_renewal_hours` -- **Optional.** The number of hours until the CA certificate is eliglble for early renewal.
  - `allowed_uses` -- **Optional.** This is a list of the [IETF RFC 5280](https://tools.ietf.org/html/rfc5280) allowed uses for this certificate. The available values are [here](https://registry.terraform.io/providers/hashicorp/tls/3.0.0/docs/resources/self_signed_cert). TFCA defaults to allowing all of the listed allowed uses.
 
 and the RFC 5280 subject names:
-
  - `common_name`
  - `organization`
  - `organizational_unit`
