@@ -73,7 +73,7 @@ module "leaf_certs" {
   source                = "./modules/tfca_leaf_cert"
   for_each              = var.leaf_certs
   leaf_name             = each.key
-  ca_private_key_pem    = tls_private_key.ca.private_key_pem
+  ca_private_key_pem                           = tls_private_key.ca.private_key_pem
   ca_cert_pem           = tls_self_signed_cert.ca.cert_pem
   output_dir            = var.output_dir
   write_keys            = var.write_keys
