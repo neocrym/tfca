@@ -1,6 +1,8 @@
 name: "Terraform fmt check"
-# Triggers the workflow on push or pull request events
-on: [push, pull_request]
+
+# Triggers the workflow on all pushes
+on: [push]
+
 jobs:
   terraform_fmt:
     runs-on: ubuntu-latest
