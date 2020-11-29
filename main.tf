@@ -54,6 +54,7 @@ resource "tls_self_signed_cert" "ca" {
 }
 
 resource "local_file" "ca__key" {
+  count                = var.write_keys ? 1 : 0
   sensitive_content    = tls_private_key.ca.private_key_pem
   filename             = "${var.output_dir}/ca.key"
   file_permission      = "0600"
@@ -61,13 +62,12 @@ resource "local_file" "ca__key" {
 }
 
 resource "local_file" "ca__crt" {
+  count                = var.write_certs ? 1 : 0
   sensitive_content    = tls_self_signed_cert.ca.cert_pem
   filename             = "${var.output_dir}/ca.crt"
   file_permission      = "0644"
   directory_permission = "0755"
 }
-
-## SERVER
 
 module "leaf_certs" {
   source                = "./modules/tfca_leaf_cert"
@@ -76,6 +76,8 @@ module "leaf_certs" {
   ca_private_key_pem    = tls_private_key.ca.private_key_pem
   ca_cert_pem           = tls_self_signed_cert.ca.cert_pem
   output_dir            = var.output_dir
+  write_keys            = var.write_keys
+  write_certs           = var.write_certs
   key_algorithm         = var.key_algorithm
   common_name           = try(each.value.common_name, null)
   organization          = try(each.value.organization, null)

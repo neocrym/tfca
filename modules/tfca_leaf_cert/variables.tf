@@ -28,6 +28,16 @@ variable "output_dir" {
   type = string
 }
 
+variable "write_keys" {
+  type    = bool
+  default = true
+}
+
+variable "write_certs" {
+  type    = bool
+  default = true
+}
+
 variable "key_algorithm" {
   type = string
 }

@@ -17,7 +17,7 @@ This Terraform code creates a self-signed CA certificate with the Common Name `e
 
 ```terraform
 module "mycerts" {
-  source         = "github.com/neocrym/tfca?ref=v0.1.1"
+  source         = "github.com/neocrym/tfca?ref=v0.1.2"
   ca_common_name = "example.com"
   leaf_certs = {
     server1 = {
@@ -46,6 +46,8 @@ module "mycerts" {
 ## Variables
 
  - `output_dir` -- **Optional.** The directory to write the certificates and private keys to. Defaults to the module's current directory.
+ - `write_keys` -- **Optional.** Whether to write the private keys to the filesystem. Set this to `false` if you only want to access the keys as a Terraform output.
+ - `write_certs` -- **Optional.** Whether to write the certificates to the filesystem. Set this to `false` if you only want to access the certificates as a Terraform output.
  - `key_algorithm` -- **Optional.** This can be either `"RSA"` or `"ECDSA"`. Defaults to RSA.
  - `rsa_bits` -- **Optional.** This is the number of bits to use when `key_algorithm` is set to RSA.
  - `ecdsa_curve` -- **Optional.** This is the elliptic curve to use when the `key_algorithm` is set to ECDSA. The choices are `"P224"`, `"P256"`, `"P384"` or `"P521"`, with `"P224"` as the default.

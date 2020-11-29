@@ -32,6 +32,7 @@ resource "tls_locally_signed_cert" "leaf" {
 }
 
 resource "local_file" "leaf__key" {
+  count                = var.write_keys ? 1 : 0
   sensitive_content    = tls_private_key.leaf.private_key_pem
   filename             = "${var.output_dir}/${var.leaf_name}.key"
   file_permission      = "0600"
@@ -39,6 +40,7 @@ resource "local_file" "leaf__key" {
 }
 
 resource "local_file" "server__crt" {
+  count                = var.write_certs ? 1 : 0
   sensitive_content    = tls_locally_signed_cert.leaf.cert_pem
   filename             = "${var.output_dir}/${var.leaf_name}.crt"
   file_permission      = "0644"
