@@ -3,6 +3,16 @@ variable "output_dir" {
   default = "./"
 }
 
+variable "write_keys" {
+  type    = bool
+  default = true
+}
+
+variable "write_certs" {
+  type    = bool
+  default = true
+}
+
 variable "rsa_bits" {
   type    = number
   default = null
