@@ -23,6 +23,8 @@ locals {
     "microsoft_server_gated_crypto",
     "netscape_server_gated_crypto",
   ]
+  ca_private_key_filename = "${var.output_dir}/ca.key"
+  ca_cert_filename = "${var.output_dir}/ca.crt"
 }
 ## CERTIFICATE AUTHORITY
 
@@ -56,7 +58,7 @@ resource "tls_self_signed_cert" "ca" {
 resource "local_file" "ca__key" {
   count                = var.write_keys ? 1 : 0
   sensitive_content    = tls_private_key.ca.private_key_pem
-  filename             = "${var.output_dir}/ca.key"
+  filename             = local.ca_private_key_filename
   file_permission      = "0600"
   directory_permission = "0755"
 }
@@ -64,7 +66,7 @@ resource "local_file" "ca__key" {
 resource "local_file" "ca__crt" {
   count                = var.write_certs ? 1 : 0
   sensitive_content    = tls_self_signed_cert.ca.cert_pem
-  filename             = "${var.output_dir}/ca.crt"
+  filename             = local.ca_cert_filename
   file_permission      = "0644"
   directory_permission = "0755"
 }
