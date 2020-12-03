@@ -1,6 +1,6 @@
 locals {
   private_key_filename = "${var.output_dir}/${var.leaf_name}.key"
-  cert_filename = "${var.output_dir}/${var.leaf_name}.crt"
+  cert_filename        = "${var.output_dir}/${var.leaf_name}.crt"
 }
 
 resource "tls_private_key" "leaf" {

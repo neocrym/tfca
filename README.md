@@ -17,7 +17,7 @@ This Terraform code creates a self-signed CA certificate with the Common Name `e
 
 ```terraform
 module "mycerts" {
-  source         = "github.com/neocrym/tfca?ref=v0.1.4"
+  source         = "github.com/neocrym/tfca?ref=v0.1.5"
   ca_common_name = "example.com"
   leaf_certs = {
     server1 = {

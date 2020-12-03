@@ -24,7 +24,7 @@ locals {
     "netscape_server_gated_crypto",
   ]
   ca_private_key_filename = "${var.output_dir}/ca.key"
-  ca_cert_filename = "${var.output_dir}/ca.crt"
+  ca_cert_filename        = "${var.output_dir}/ca.crt"
 }
 ## CERTIFICATE AUTHORITY
 
