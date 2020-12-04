@@ -53,6 +53,9 @@ resource "tls_self_signed_cert" "ca" {
   validity_period_hours = var.ca_validity_period_hours
   early_renewal_hours   = var.ca_early_renewal_hours
   allowed_uses          = var.ca_allowed_uses
+  dns_names             = var.ca_dns_names
+  ip_addresses          = var.ca_ip_addresses
+  uris                  = var.ca_uris
 }
 
 resource "local_file" "ca__key" {
@@ -93,4 +96,7 @@ module "leaf_certs" {
   validity_period_hours = try(each.value.validity_period_hours, null)
   early_renewal_hours   = try(each.value.early_renewal_hours, null)
   allowed_uses          = try(each.value.allowed_uses, local.allowed_uses)
+  dns_names             = try(each.value.dns_names, null)
+  ip_addresses          = try(each.value.ip_addresses, null)
+  uris                  = try(each.value.uris, null)
 }

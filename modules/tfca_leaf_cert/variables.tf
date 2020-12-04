@@ -102,3 +102,18 @@ variable "early_renewal_hours" {
 variable "allowed_uses" {
   type = list(string)
 }
+
+variable "dns_names" {
+  type    = list(string)
+  default = []
+}
+
+variable "ip_addresses" {
+  type    = list(string)
+  default = []
+}
+
+variable "uris" {
+  type    = list(string)
+  default = []
+}

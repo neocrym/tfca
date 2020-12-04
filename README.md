@@ -17,7 +17,7 @@ This Terraform code creates a self-signed CA certificate with the Common Name `e
 
 ```terraform
 module "mycerts" {
-  source         = "github.com/neocrym/tfca?ref=v0.1.5"
+  source         = "github.com/neocrym/tfca?ref=v0.1.6"
   ca_common_name = "example.com"
   leaf_certs = {
     server1 = {
@@ -66,6 +66,11 @@ The CA certificate's identity is set with the following variables. They are all 
  - `ca_postal_code`
  - `ca_serial_number`
 
+You can also request that the CA certificate be requested for specific DNS names, IP addresses, or URIs with these variables. Each one of them is a list of strings.
+ - `ca_dns_names`
+ - `ca_ip_addresses`
+ - `ca_uris`
+
 Information about the leaf certificates are set by assigning a mapping to the `leaf_certs` variable. The mapping keys become the filenames for the certificates and private keys, and the mapping values must contain these keys:
  - `validity_period_hours` -- **Optional.** The number of hours after issuing that the CA certificate will be valid for.
  - `early_renewal_hours` -- **Optional.** The number of hours until the CA certificate is eliglble for early renewal.
@@ -80,6 +85,11 @@ and the RFC 5280 subject names:
  - `province`
  - `postal_code`
  - `serial_number`
+
+You can also request that the leaf certificate be requested for specific DNS names, IP addresses, or URIs with these variables. Each one of them is a list of strings.
+ - `dns_names`
+ - `ip_addresses`
+ - `uris`
 
 ## Threat model
 

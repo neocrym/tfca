@@ -113,6 +113,21 @@ variable "ca_allowed_uses" {
   ]
 }
 
+variable "ca_dns_names" {
+  type    = list(string)
+  default = []
+}
+
+variable "ca_ip_addresses" {
+  type    = list(string)
+  default = []
+}
+
+variable "ca_uris" {
+  type    = list(string)
+  default = []
+}
+
 variable "leaf_certs" {
   type    = any
   default = {}

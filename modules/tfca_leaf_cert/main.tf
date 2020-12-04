@@ -23,6 +23,9 @@ resource "tls_cert_request" "leaf" {
     postal_code         = var.postal_code
     serial_number       = var.serial_number
   }
+  dns_names    = var.dns_names
+  ip_addresses = var.ip_addresses
+  uris         = var.uris
 }
 
 resource "tls_locally_signed_cert" "leaf" {
